@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            /* Reset some default styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Style the container box */
+.box {
+    background-color: #fff;
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Style the heading */
+.h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style the input field */
+#date {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style the calculate button */
+#calculateBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#calculateBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Style the result paragraph */
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+        </style>
+        <title>Page Title</title>
+
+<link href=style.css> 
+      
+ </head>
+  
+ <body>
+  
+<div class="box">
+
+<h1 class="h1">Age Calculator</h1> 
+ 
+<label for="date"></label>
+<input type=date name="birthDate"id="date" required>
+
+<input type="button" value="calculate" id="calculateBtn"> 
+
+<p id="result"></p> 
+</div>
+
+<script>
+ 
+let userInput = document.getElementById("date")
+
+userInput.max=new Date().toISOString().split("T")[0];
+
+let btn = document.getElementById("calculateBtn")
+
+let result = document.getElementById("result")
+
+
+btn.addEventListener("click",calculateAge)
+
+function calculateAge(){
+
+if(userInput.value === ""){
+ alert("Please Select Date")   
+}
+
+else{
+  getAge();  
+}
+
+}
+
+function getAge(){
+
+let birthDate = new Date(userInput.value) 
+
+let d1 = birthDate.getDate() 
+let m1 = birthDate.getMonth()
+let y1 = birthDate.getFullYear()
+
+let today =new Date()
+
+let d2 = today.getDate()
+let m2 = today.getMonth()
+let y2 = today.getFullYear()
+
+//year Difference
+
+let year = y2 - y1
+
+//Month Difference
+
+let month;
+if(m2 >= m1) {
+month = m2 - m1;    
+}
+
+else{
+year --;
+month = 12 + m2 - m1;    
+}
+
+//days Difference
+
+let date;
+if(d2 >= d1){
+date = d2 - d1 ;  
+}
+
+else{
+month --;
+d3 = daysInMonth(y1,m1) 
+
+date = d3 + d2 - d1;  
+}
+
+//case when month goes negative
+
+if(month<0){
+month = 11;   
+year--;
+}
+
+function daysInMonth(year,month){
+return new Date(year,month,0).getDate();  
+    
+}
+
+result.innerHTML=
+`You are ${year} Year 
+ ${month} month <br>
+ ${date} days Old`
+    
+}
+
+    
+</script> 
+ </body>
+</html>
